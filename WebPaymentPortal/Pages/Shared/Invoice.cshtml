@@ -1,0 +1,151 @@
+﻿@page
+@model WebPaymentPortal.Pages.Shared.InvoiceModel
+@{
+    ViewData["Title"] = "Pay your Invoice";
+}
+
+<div class="text-center">
+    <p>Please select the prefered payment type and pay your Invoice</p>
+    <table border="1" height="300px" width="500px" align="center">
+        <tr>
+            <td>
+               Name:
+            </td>
+            <td>
+            Mr James Smith
+            </td>
+        </tr>
+           <tr>
+            <td>
+               Invoice #:
+            </td>
+            <td>
+                124567
+            </td>
+        </tr>
+         <tr>
+            <td>
+               Payment Due Date:
+            </td>
+            <td>
+                6/29/2022
+            </td>
+        </tr>
+        <tr>
+            <td>
+               Amount:
+            </td>
+            <td>
+               100$
+            </td>
+        </tr>
+        <tr>
+            <td colspan="2">
+             <form method="post">
+                     <button type="submit"  asp-page-handler="ShowPayPalView" > Pay with PayPal </button>
+                     <button type="submit"  asp-page-handler="ShowCCView" > Pay with Credit Card</button>
+                </form>    
+            </td>
+            <td>
+
+            </td>
+        </tr>
+    </table>
+
+  @if (@Model.showCCView)
+ {
+     <div id="CCPayment">
+        <p> Please provide your Credit Card Information</p>
+      <form method="post">
+        <table border="1" height="300px" width="500px" align="center">
+        <tr>
+            <td>
+               Full Name :
+            </td>
+            <td>
+                  <input asp-for="FullName" />
+            </td>
+        </tr>
+           <tr>
+            <td>
+               Credit Card #:
+            </td>
+            <td>
+               <input type="number" asp-for="CreditCardNumber" />
+             
+            </td>
+        </tr>
+         <tr>
+            <td>
+               Expiration Date:
+            </td>
+            <td>
+               <input type="date" asp-for="ExpirationDate" />
+             
+            </td>
+        </tr>
+        <tr>
+            <td>
+               Security Code:
+            </td>
+            <td>
+               <input type="number"  asp-for="SecurityCode" />
+               
+            </td>
+        </tr>
+        <tr>
+            <td colspan="2">
+                     <button type="submit" asp-page-handler="PayWithCC" > Submit </button>
+                  
+            </td>
+            <td>
+
+            </td>
+        </tr>
+    </table>
+     </form> 
+    </div>
+ } 
+    
+ @if (@Model.showPPView)
+{
+    <div id="PayPalPayment">
+        <p> Please provide your Pay Pal login information</p>
+    <form method="post">
+        <table border="1" height="300px" width="500px" align="center">
+        <tr>
+            <td>
+                User Name:
+            </td>
+            <td>
+            <input type="text" />
+            </td>
+        </tr>
+        <tr>
+           <td>
+               Password:
+            </td>
+            <td>
+            <input type="password" />
+            </td>
+        </tr>
+      
+        <tr>
+            <td colspan="2">
+            
+                     <button type="submit"  asp-page-handler="PayWithPayPal" > Submit </button>
+                   
+            </td>
+          <td>
+
+            </td>
+        </tr>
+    </table>
+     </form>
+    </div>
+}
+    
+
+    <h3 class="clearfix">@Model.Message</h3>
+</div>
+
